@@ -1,0 +1,156 @@
+.tree * {
+  margin: 0;
+  padding: 0; }
+
+.tree ul.tree-branch {
+  padding-top: 20px;
+  position: relative;
+  display: flex; }
+
+.tree li.tree-node {
+  float: left;
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 20px 5px 0 5px; }
+  .tree li.tree-node::before, .tree li.tree-node::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 50%;
+    border-top: 1px solid #ccc;
+    width: 50%;
+    height: 20px; }
+  .tree li.tree-node::after {
+    right: auto;
+    left: 50%;
+    border-left: 1px solid #ccc; }
+  .tree li.tree-node:only-child::after, .tree li.tree-node:only-child::before {
+    display: none; }
+  .tree li.tree-node:only-child {
+    padding-top: 0; }
+  .tree li.tree-node:first-child::before, .tree li.tree-node:last-child::after {
+    border: 0 none; }
+  .tree li.tree-node:last-child::before {
+    border-right: 1px solid #ccc;
+    -webkit-border-radius: 0 5px 0 0;
+    -moz-border-radius: 0 5px 0 0;
+    border-radius: 0 5px 0 0; }
+  .tree li.tree-node:first-child::after {
+    -webkit-border-radius: 5px 0 0 0;
+    -moz-border-radius: 5px 0 0 0;
+    border-radius: 5px 0 0 0; }
+
+.tree ul.tree-branch ul.tree-branch::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  border-left: 1px solid #ccc;
+  width: 0;
+  height: 20px; }
+
+.query-plan-node {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #666;
+  font-family: "Segoe Ui", verdana, tahoma, arial, helvetica;
+  font-size: 11px;
+  display: inline-block;
+  text-align: left;
+  -webkit-transition: all 0.25s;
+  -moz-transition: all 0.25s;
+  -ms-transition: all 0.25s;
+  -o-transition: all 0.25s;
+  transition: all 0.25s;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  /*Time for some hover effects*/
+  /*We will apply the hover effect the the lineage of the element also*/
+  /*Connector styles on hover*/ }
+  .query-plan-node h3 {
+    font-weight: 600;
+    font-size: 1.455em;
+    line-height: 1.636em;
+    text-transform: uppercase;
+    float: left; }
+  .query-plan-node h4 {
+    font-weight: bold;
+    font-size: 1em; }
+  .query-plan-node:hover, .query-plan-node:hover + ul li div.query-plan-node {
+    border: 1px solid #317ECC;
+    -webkit-box-shadow: 1px 1px 3px rgba(49, 126, 204, 0.2);
+    -moz-box-shadow: 1px 1px 3px rgba(49, 126, 204, 0.2);
+    box-shadow: 1px 1px 3px rgba(49, 126, 204, 0.2); }
+  .query-plan-node:hover + ul li::after,
+  .query-plan-node:hover + ul li::before,
+  .query-plan-node:hover + ul::before,
+  .query-plan-node:hover + ul ul::before {
+    border-color: #317ECC; }
+  .query-plan-node summary {
+    outline: none; }
+  .query-plan-node summary:hover {
+    cursor: pointer; }
+  .query-plan-node details summary::-webkit-details-marker, .query-plan-node details summary::before {
+    display: none; }
+  .query-plan-node details {
+    width: 260px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    -webkit-transition: width 0.1s ease;
+    -moz-transition: width 0.1s ease;
+    -ms-transition: width 0.1s ease;
+    -o-transition: width 0.1s ease;
+    transition: width 0.1s ease;
+    -webkit-transition: height 0.1s ease;
+    -moz-transition: height 0.1s ease;
+    -ms-transition: height 0.1s ease;
+    -o-transition: height 0.1s ease;
+    transition: height 0.1s ease; }
+    .query-plan-node details table {
+      border-collapse: collapse;
+      margin: .5em 0;
+      width: 100%; }
+      .query-plan-node details table th {
+        width: 180px; }
+      .query-plan-node details table td, .query-plan-node details table th {
+        border-bottom: 1px solid rgba(102, 102, 102, 0.1); }
+    .query-plan-node details li {
+      margin-left: 2em; }
+    .query-plan-node details div {
+      overflow: hidden;
+      text-overflow: ellipsis; }
+  .query-plan-node details[open] {
+    width: 300px;
+    display: inline-block; }
+  .query-plan-node header {
+    *zoom: 1; }
+    .query-plan-node header:before, .query-plan-node header:after {
+      content: " ";
+      display: table; }
+    .query-plan-node header:after {
+      clear: both; }
+    .query-plan-node header .node-duration {
+      float: right;
+      right: 0px; }
+  .query-plan-node .query-plan-node-bar {
+    height: 5px;
+    margin-top: 10px;
+    margin-bottom: 3px;
+    border-radius: 6px;
+    background-color: #dedede;
+    position: relative; }
+    .query-plan-node .query-plan-node-bar .query-plan-node-bar-fill {
+      border-radius: 6px;
+      height: 100%;
+      background-color: #55aa55;
+      text-align: left;
+      position: absolute;
+      left: 0;
+      top: 0; }

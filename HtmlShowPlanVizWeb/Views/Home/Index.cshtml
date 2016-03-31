@@ -1,0 +1,60 @@
+﻿@model HtmlShowPlanVizWeb.Controllers.ShowPlanModel
+@{
+    ViewBag.Title = "Home Page";
+    
+}
+
+<div class="application">
+    @Html.ValidationSummary(true)
+
+    @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline" }))
+    {
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                        Browse&hellip; <input type="file" id="showPlanFile" name="showPlanFile" accept=".xml,.sqlplan">
+                    </span>
+                </span>
+                <input type="text" class="form-control" readonly>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default">View Showplan</button>
+    }
+
+    @if (Model != null)
+    {
+        <div class="show-plan-container">
+            @Html.Raw(Model.ShowPlanHtml)
+        </div>
+    }
+
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready(function () {
+            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log) alert(log);
+                }
+            });
+            $(".show-plan-container").addQueryPlanZoom();
+        });
+    </script>
+
+}
